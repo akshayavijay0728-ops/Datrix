@@ -1,0 +1,1762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Datrix — Earn & Save on Everything</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --saffron: #FF6B00;
+    --saffron-light: #FF8C3A;
+    --saffron-pale: #FFF3E8;
+    --green: #138808;
+    --green-light: #1FAD0A;
+    --navy: #0A0F2C;
+    --navy2: #141931;
+    --cream: #FFFBF5;
+    --text: #1A1A2E;
+    --muted: #6B7280;
+    --white: #FFFFFF;
+    --card: #FFFFFF;
+    --border: #F0EBE1;
+    --gold: #F5A623;
+    --rupee: #FF6B00;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ---- ANNOUNCEMENT BAR ---- */
+  .announcement {
+    background: linear-gradient(90deg, var(--navy) 0%, #1a2040 100%);
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+  .announcement a { color: var(--saffron); text-decoration: none; font-weight: 600; }
+
+  /* ---- NAV ---- */
+  nav {
+    background: rgba(255,251,245,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 0 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 68px;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+  .logo-mark {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, var(--saffron) 0%, var(--gold) 100%);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    color: white;
+    letter-spacing: -1px;
+    box-shadow: 0 4px 12px rgba(255,107,0,0.3);
+  }
+  .logo-text {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--navy);
+    letter-spacing: -0.5px;
+  }
+  .logo-text span { color: var(--saffron); }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 500;
+    font-size: 15px;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--saffron); }
+
+  .nav-cta {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--saffron) 0%, #FF8A00 100%);
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(255,107,0,0.35);
+  }
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(255,107,0,0.45);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--navy);
+    border: 1.5px solid var(--border);
+    padding: 10px 22px;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .btn-secondary:hover {
+    border-color: var(--saffron);
+    color: var(--saffron);
+  }
+
+  /* ---- HERO ---- */
+  .hero {
+    min-height: calc(100vh - 108px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 60px 5% 80px;
+    gap: 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(255,107,0,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(19,136,8,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--saffron-pale);
+    border: 1px solid rgba(255,107,0,0.2);
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--saffron);
+    margin-bottom: 24px;
+  }
+  .hero-badge .dot {
+    width: 7px; height: 7px;
+    background: var(--saffron);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(38px, 5vw, 62px);
+    line-height: 1.08;
+    letter-spacing: -1.5px;
+    color: var(--navy);
+    margin-bottom: 20px;
+  }
+
+  .hero h1 .highlight {
+    color: var(--saffron);
+    position: relative;
+    display: inline-block;
+  }
+  .hero h1 .highlight::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--saffron), var(--gold));
+    border-radius: 2px;
+    transform: scaleX(0);
+    animation: underlineIn 0.8s 0.5s forwards;
+    transform-origin: left;
+  }
+  @keyframes underlineIn {
+    to { transform: scaleX(1); }
+  }
+
+  .hero p {
+    font-size: 17px;
+    color: var(--muted);
+    line-height: 1.65;
+    max-width: 480px;
+    margin-bottom: 36px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+
+  .hero-actions .btn-primary {
+    padding: 14px 28px;
+    font-size: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .stat {
+    display: flex;
+    flex-direction: column;
+  }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 28px;
+    color: var(--navy);
+    line-height: 1;
+  }
+  .stat-num .rupee-sign { color: var(--saffron); }
+  .stat-label { font-size: 13px; color: var(--muted); margin-top: 3px; }
+
+  /* ---- HERO RIGHT (phone mockup) ---- */
+  .hero-visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .phone-frame {
+    width: 280px;
+    height: 580px;
+    background: var(--navy);
+    border-radius: 44px;
+    padding: 14px;
+    position: relative;
+    box-shadow: 0 40px 80px rgba(10,15,44,0.4), 0 0 0 1px rgba(255,255,255,0.08) inset;
+    animation: floatPhone 4s ease-in-out infinite;
+    z-index: 2;
+  }
+
+  @keyframes floatPhone {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-16px) rotate(-2deg); }
+  }
+
+  .phone-inner {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(160deg, #1A1F3C 0%, #0D1022 100%);
+    border-radius: 32px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .phone-status {
+    padding: 14px 18px 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .phone-status span { color: white; font-size: 11px; font-weight: 600; }
+
+  .phone-header {
+    padding: 8px 18px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .phone-avatar {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--saffron), var(--gold));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+  .phone-greet { color: white; }
+  .phone-greet .name { font-size: 13px; font-weight: 600; }
+  .phone-greet .sub { font-size: 11px; color: rgba(255,255,255,0.5); }
+
+  .phone-balance {
+    margin: 0 16px 16px;
+    background: linear-gradient(135deg, var(--saffron) 0%, var(--gold) 100%);
+    border-radius: 20px;
+    padding: 18px;
+    position: relative;
+    overflow: hidden;
+  }
+  .phone-balance::before {
+    content: '';
+    position: absolute;
+    top: -20px; right: -20px;
+    width: 80px; height: 80px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50%;
+  }
+  .balance-label { color: rgba(255,255,255,0.8); font-size: 11px; font-weight: 500; margin-bottom: 6px; }
+  .balance-amount {
+    font-family: 'Syne', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: white;
+    line-height: 1;
+  }
+  .balance-sub { color: rgba(255,255,255,0.7); font-size: 11px; margin-top: 4px; }
+
+  .phone-quick {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 0 16px 16px;
+  }
+  .quick-card {
+    background: rgba(255,255,255,0.06);
+    border-radius: 14px;
+    padding: 12px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .quick-icon { font-size: 20px; margin-bottom: 6px; }
+  .quick-label { color: rgba(255,255,255,0.6); font-size: 10px; }
+  .quick-val { color: white; font-size: 13px; font-weight: 600; margin-top: 2px; }
+
+  .phone-txns {
+    padding: 0 16px;
+    flex: 1;
+  }
+  .txn-title { color: rgba(255,255,255,0.5); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+  .txn-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .txn-ico {
+    width: 32px; height: 32px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .txn-info { flex: 1; }
+  .txn-name { color: white; font-size: 12px; font-weight: 500; }
+  .txn-time { color: rgba(255,255,255,0.4); font-size: 10px; }
+  .txn-earn { font-size: 12px; font-weight: 700; color: #4ADE80; }
+
+  /* Floating badges around phone */
+  .float-badge {
+    position: absolute;
+    background: white;
+    border-radius: 14px;
+    padding: 10px 14px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    animation: floatBadge 3s ease-in-out infinite;
+    z-index: 3;
+  }
+  .float-badge:nth-child(2) { animation-delay: -1s; }
+  .float-badge:nth-child(3) { animation-delay: -2s; }
+
+  @keyframes floatBadge {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .badge-cashback { top: 10%; right: -60px; color: var(--green); }
+  .badge-upi { bottom: 25%; left: -80px; color: var(--saffron); }
+  .badge-secure { top: 55%; right: -70px; color: #7C3AED; font-size: 11px; }
+
+  /* ---- HOW IT WORKS ---- */
+  .section { padding: 80px 5%; }
+  .section-alt { background: var(--navy); color: white; }
+
+  .section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--saffron-pale);
+    color: var(--saffron);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 50px;
+    margin-bottom: 16px;
+  }
+  .section-alt .section-tag {
+    background: rgba(255,107,0,0.15);
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(28px, 3.5vw, 44px);
+    letter-spacing: -1px;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  .section-sub {
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.65;
+    margin-bottom: 60px;
+  }
+  .section-alt .section-sub { color: rgba(255,255,255,0.6); }
+  .section-alt .section-title { color: white; }
+
+  /* steps */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-bottom: 50px;
+  }
+  .step-card {
+    background: white;
+    border-radius: 24px;
+    padding: 28px;
+    border: 1px solid var(--border);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .step-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--saffron), var(--gold));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .step-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
+  .step-card:hover::before { transform: scaleX(1); }
+
+  .step-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--saffron-pale);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  .step-icon { font-size: 36px; margin-bottom: 14px; }
+  .step-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: var(--navy);
+  }
+  .step-card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+  /* ---- FEATURES ---- */
+  .features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .features.reverse { direction: rtl; }
+  .features.reverse > * { direction: ltr; }
+
+  .feature-visual {
+    background: linear-gradient(135deg, #F8F4EE 0%, #FFF3E8 100%);
+    border-radius: 28px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .feature-visual::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; right: -40px;
+    width: 160px; height: 160px;
+    background: radial-gradient(circle, rgba(255,107,0,0.1) 0%, transparent 70%);
+  }
+
+  .feat-icon-big {
+    font-size: 52px;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .feature-content h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(26px, 3vw, 38px);
+    letter-spacing: -1px;
+    color: var(--navy);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .feature-content p {
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+  .feature-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .pill {
+    background: var(--saffron-pale);
+    color: var(--saffron);
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid rgba(255,107,0,0.15);
+  }
+
+  /* brand logos in feature */
+  .brand-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+  }
+  .brand-chip {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* mini transaction list */
+  .mini-list { display: flex; flex-direction: column; gap: 10px; }
+  .mini-item {
+    background: white;
+    border-radius: 14px;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+  }
+  .mini-item:hover { transform: translateX(4px); }
+  .mini-item-left { display: flex; align-items: center; gap: 10px; }
+  .mini-ico { font-size: 22px; }
+  .mini-name { font-weight: 600; font-size: 14px; color: var(--text); }
+  .mini-sub { font-size: 12px; color: var(--muted); }
+  .mini-earn { font-weight: 700; color: var(--green); font-size: 14px; }
+
+  /* save section */
+  .save-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .save-card {
+    background: white;
+    border-radius: 16px;
+    padding: 18px;
+    border: 1px solid var(--border);
+    transition: transform 0.2s;
+  }
+  .save-card:hover { transform: scale(1.02); }
+  .save-card-icon { font-size: 26px; margin-bottom: 8px; }
+  .save-card-title { font-weight: 700; font-size: 14px; color: var(--navy); margin-bottom: 4px; }
+  .save-card-desc { font-size: 12px; color: var(--muted); line-height: 1.4; }
+  .save-card-badge {
+    margin-top: 8px;
+    display: inline-block;
+    background: #DCFCE7;
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 50px;
+  }
+
+  /* ---- DATA MONETIZE ---- */
+  .data-section {
+    background: var(--navy);
+    color: white;
+    padding: 80px 5%;
+  }
+  .data-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .data-content h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: white;
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+  .data-content p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+  .trust-points {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  .trust-point {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .trust-check {
+    width: 22px; height: 22px;
+    background: var(--green);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .trust-text { font-size: 15px; color: rgba(255,255,255,0.8); line-height: 1.5; }
+
+  .data-visual {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 28px;
+    padding: 32px;
+  }
+  .data-earn-total {
+    text-align: center;
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .data-earn-total .label { color: rgba(255,255,255,0.5); font-size: 13px; margin-bottom: 6px; }
+  .data-earn-total .big {
+    font-family: 'Syne', sans-serif;
+    font-size: 48px;
+    font-weight: 800;
+    background: linear-gradient(90deg, var(--saffron), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+  .data-earn-total .sub { color: rgba(255,255,255,0.4); font-size: 12px; margin-top: 4px; }
+  .data-sources { display: flex; flex-direction: column; gap: 12px; }
+  .data-source {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 14px;
+  }
+  .ds-left { display: flex; align-items: center; gap: 10px; }
+  .ds-ico { font-size: 20px; }
+  .ds-name { color: white; font-size: 14px; font-weight: 500; }
+  .ds-earn { color: var(--saffron); font-weight: 700; font-size: 14px; }
+  .ds-bar {
+    width: 60px;
+    height: 6px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .ds-bar-fill { height: 100%; background: linear-gradient(90deg, var(--saffron), var(--gold)); border-radius: 3px; }
+
+  /* ---- TESTIMONIALS ---- */
+  .testimonials { padding: 80px 5%; }
+  .stars { color: var(--gold); font-size: 18px; letter-spacing: 2px; margin-bottom: 4px; }
+  .rating-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 48px;
+  }
+  .rating-big {
+    font-family: 'Syne', sans-serif;
+    font-size: 64px;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1;
+  }
+  .rating-info .stars { font-size: 22px; }
+  .rating-info p { color: var(--muted); font-size: 14px; }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .review-card {
+    background: white;
+    border-radius: 20px;
+    padding: 24px;
+    border: 1px solid var(--border);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .review-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.08); }
+  .review-stars { color: var(--gold); font-size: 14px; margin-bottom: 10px; }
+  .review-text { font-size: 14px; color: var(--text); line-height: 1.65; margin-bottom: 16px; }
+  .review-author { display: flex; align-items: center; gap: 10px; }
+  .review-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--saffron), var(--gold));
+    display: flex; align-items: center; justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .review-name { font-weight: 600; font-size: 14px; color: var(--navy); }
+  .review-city { font-size: 12px; color: var(--muted); }
+
+  /* ---- SIGN UP SECTION ---- */
+  .signup-section {
+    background: linear-gradient(135deg, var(--navy) 0%, #1a2040 100%);
+    padding: 80px 5%;
+    position: relative;
+    overflow: hidden;
+  }
+  .signup-section::before {
+    content: '';
+    position: absolute;
+    top: -100px; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 300px;
+    background: radial-gradient(ellipse, rgba(255,107,0,0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .signup-inner {
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .signup-inner h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 800;
+    color: white;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  .signup-inner p { color: rgba(255,255,255,0.6); font-size: 16px; margin-bottom: 36px; }
+
+  .signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .form-row { display: flex; gap: 12px; }
+  .form-input {
+    background: rgba(255,255,255,0.08);
+    border: 1.5px solid rgba(255,255,255,0.12);
+    border-radius: 14px;
+    padding: 14px 18px;
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    width: 100%;
+    transition: border-color 0.2s, background 0.2s;
+    outline: none;
+  }
+  .form-input::placeholder { color: rgba(255,255,255,0.35); }
+  .form-input:focus {
+    border-color: var(--saffron);
+    background: rgba(255,107,0,0.08);
+  }
+  .form-select {
+    background: rgba(255,255,255,0.08);
+    border: 1.5px solid rgba(255,255,255,0.12);
+    border-radius: 14px;
+    padding: 14px 18px;
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    width: 100%;
+    transition: border-color 0.2s;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+  }
+  .form-select option { background: var(--navy); color: white; }
+  .form-select:focus { border-color: var(--saffron); }
+
+  .submit-btn {
+    background: linear-gradient(135deg, var(--saffron) 0%, var(--gold) 100%);
+    border: none;
+    border-radius: 14px;
+    padding: 16px;
+    color: white;
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(255,107,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(255,107,0,0.5); }
+  .submit-btn:disabled { opacity: 0.6; transform: none; cursor: not-allowed; }
+
+  .ai-response-box {
+    margin-top: 20px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,107,0,0.3);
+    border-radius: 16px;
+    padding: 20px;
+    text-align: left;
+    display: none;
+  }
+  .ai-response-box.visible { display: block; }
+  .ai-response-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    color: var(--saffron);
+    font-weight: 600;
+    font-size: 13px;
+  }
+  .ai-response-text {
+    color: rgba(255,255,255,0.85);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  .ai-loading {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255,255,255,0.5);
+    font-size: 14px;
+  }
+  .dot-pulse { animation: dotPulse 1.4s infinite; }
+  .dot-pulse:nth-child(2) { animation-delay: 0.2s; }
+  .dot-pulse:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes dotPulse {
+    0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+    40% { opacity: 1; transform: scale(1); }
+  }
+
+  /* ---- FOOTER ---- */
+  footer {
+    background: var(--navy);
+    color: white;
+    padding: 60px 5% 32px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 48px;
+  }
+  .footer-brand p {
+    color: rgba(255,255,255,0.5);
+    font-size: 14px;
+    line-height: 1.65;
+    margin-top: 14px;
+    margin-bottom: 20px;
+  }
+  .footer-social { display: flex; gap: 12px; }
+  .social-btn {
+    width: 38px; height: 38px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    transition: background 0.2s;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .social-btn:hover { background: var(--saffron); }
+
+  .footer-col h4 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 18px;
+    color: white;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul li a {
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+  .footer-col ul li a:hover { color: var(--saffron); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-bottom p { color: rgba(255,255,255,0.35); font-size: 13px; }
+  .footer-legal { display: flex; gap: 20px; }
+  .footer-legal a { color: rgba(255,255,255,0.35); font-size: 13px; text-decoration: none; }
+  .footer-legal a:hover { color: var(--saffron); }
+
+  /* Download badges */
+  .download-badges { display: flex; gap: 12px; flex-wrap: wrap; }
+  .dl-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 10px 18px;
+    border-radius: 12px;
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .dl-badge:hover { background: var(--saffron); border-color: var(--saffron); }
+  .dl-badge-icon { font-size: 20px; }
+  .dl-badge-sub { font-size: 10px; opacity: 0.7; line-height: 1; }
+  .dl-badge-text { font-size: 14px; font-weight: 700; }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding: 40px 5%; }
+    .hero-visual { display: none; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    .features, .data-grid, .footer-grid { grid-template-columns: 1fr; }
+    .features.reverse { direction: ltr; }
+    .reviews-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .steps, .reviews-grid { grid-template-columns: 1fr; }
+    .form-row { flex-direction: column; }
+    .save-cards { grid-template-columns: 1fr; }
+    nav .nav-links, nav .btn-secondary { display: none; }
+  }
+
+  /* fade in on scroll */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s, transform 0.7s;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT -->
+<div class="announcement">
+  🇮🇳 Now live across India! Link UPI, get rewarded on every transaction.
+  <a href="#signup">Get Early Access →</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="logo-mark">D</div>
+    <span class="logo-text">Datrix<span>.</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#how-it-works">How it works</a></li>
+    <li><a href="#earn">Earn</a></li>
+    <li><a href="#save">Save</a></li>
+    <li><a href="#data">Your Data</a></li>
+    <li><a href="#mission">Mission</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="#signup" class="btn-secondary">Sign in</a>
+    <a href="#signup" class="btn-primary">Get Started Free</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      3 Lakh+ Indians already earning
+    </div>
+    <h1>Earn &amp; Save on <span class="highlight">Everything</span><br>in India</h1>
+    <p>Link your UPI, credit cards and bank accounts. Datrix finds you cashback, rewards and savings on every rupee you spend — automatically, with zero effort.</p>
+    <div class="hero-actions">
+      <a href="#signup" class="btn-primary">
+        🚀 Start Earning Free
+      </a>
+      <a href="#how-it-works" class="btn-secondary">See how it works</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num"><span class="rupee-sign">₹</span>42 Cr+</span>
+        <span class="stat-label">Saved by members</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">3L+</span>
+        <span class="stat-label">Active users</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">4.9 ⭐</span>
+        <span class="stat-label">App Store rating</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phone Mockup -->
+  <div class="hero-visual">
+    <div class="float-badge badge-cashback">
+      💰 +₹84 cashback earned!
+    </div>
+    <div class="float-badge badge-upi">
+      📱 UPI linked securely
+    </div>
+    <div class="float-badge badge-secure">
+      🔒 256-bit SSL encrypted
+    </div>
+    <div class="phone-frame">
+      <div class="phone-inner">
+        <div class="phone-status">
+          <span>9:41 AM</span>
+          <span>●●● 100%</span>
+        </div>
+        <div class="phone-header">
+          <div class="phone-avatar">🙏</div>
+          <div class="phone-greet">
+            <div class="name">Namaste, Priya!</div>
+            <div class="sub">Your money's working harder</div>
+          </div>
+        </div>
+        <div class="phone-balance">
+          <div class="balance-label">Total Earned This Month</div>
+          <div class="balance-amount">₹1,240</div>
+          <div class="balance-sub">+ ₹340 pending rewards</div>
+        </div>
+        <div class="phone-quick">
+          <div class="quick-card">
+            <div class="quick-icon">🛒</div>
+            <div class="quick-label">Grocery cashback</div>
+            <div class="quick-val">₹186</div>
+          </div>
+          <div class="quick-card">
+            <div class="quick-icon">💡</div>
+            <div class="quick-label">Bill savings</div>
+            <div class="quick-val">₹420</div>
+          </div>
+          <div class="quick-card">
+            <div class="quick-icon">📊</div>
+            <div class="quick-label">Data income</div>
+            <div class="quick-val">₹634</div>
+          </div>
+          <div class="quick-card">
+            <div class="quick-icon">🎯</div>
+            <div class="quick-label">Surveys done</div>
+            <div class="quick-val">12</div>
+          </div>
+        </div>
+        <div class="phone-txns">
+          <div class="txn-title">Recent Rewards</div>
+          <div class="txn-item">
+            <div class="txn-ico" style="background:rgba(255,107,0,0.15)">🛍️</div>
+            <div class="txn-info">
+              <div class="txn-name">Flipkart purchase</div>
+              <div class="txn-time">2 mins ago</div>
+            </div>
+            <div class="txn-earn">+₹32</div>
+          </div>
+          <div class="txn-item">
+            <div class="txn-ico" style="background:rgba(19,136,8,0.15)">🍕</div>
+            <div class="txn-info">
+              <div class="txn-name">Swiggy order</div>
+              <div class="txn-time">1 hr ago</div>
+            </div>
+            <div class="txn-earn">+₹18</div>
+          </div>
+          <div class="txn-item">
+            <div class="txn-ico" style="background:rgba(124,58,237,0.15)">⛽</div>
+            <div class="txn-info">
+              <div class="txn-name">Indian Oil refuel</div>
+              <div class="txn-time">Yesterday</div>
+            </div>
+            <div class="txn-earn">+₹45</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how-it-works">
+  <div class="fade-in">
+    <div class="section-tag">⚡ Simple & Fast</div>
+    <h2 class="section-title">Start earning in under 2 minutes</h2>
+    <p class="section-sub">No receipt scanning. No manual entry. Just link your accounts and watch the rewards roll in automatically.</p>
+  </div>
+  <div class="steps fade-in">
+    <div class="step-card">
+      <div class="step-num">01</div>
+      <div class="step-icon">📲</div>
+      <h3>Download & Sign Up</h3>
+      <p>Create your free account in seconds using your mobile number or Google account.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">02</div>
+      <div class="step-icon">🔗</div>
+      <h3>Link Your Accounts</h3>
+      <p>Securely connect UPI, credit cards, Flipkart, Amazon and more. Bank-grade encryption always.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">03</div>
+      <div class="step-icon">💸</div>
+      <h3>Earn Automatically</h3>
+      <p>Datrix detects your spends and deposits cashback directly. No action needed from you.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">04</div>
+      <div class="step-icon">🏦</div>
+      <h3>Cash Out Instantly</h3>
+      <p>Transfer directly to your UPI, bank account or Paytm wallet. Instant settlements.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EARN SECTION -->
+<section class="section" id="earn" style="background: #F9F5EF;">
+  <div class="features fade-in">
+    <div class="feature-visual">
+      <div class="feat-icon-big">🛒</div>
+      <div class="mini-list">
+        <div class="mini-item">
+          <div class="mini-item-left">
+            <div class="mini-ico">🛍️</div>
+            <div>
+              <div class="mini-name">Amazon India</div>
+              <div class="mini-sub">₹2,400 spent • just now</div>
+            </div>
+          </div>
+          <div class="mini-earn">+₹96</div>
+        </div>
+        <div class="mini-item">
+          <div class="mini-item-left">
+            <div class="mini-ico">🍕</div>
+            <div>
+              <div class="mini-name">Swiggy</div>
+              <div class="mini-sub">₹380 spent • 30 min ago</div>
+            </div>
+          </div>
+          <div class="mini-earn">+₹19</div>
+        </div>
+        <div class="mini-item">
+          <div class="mini-item-left">
+            <div class="mini-ico">🚕</div>
+            <div>
+              <div class="mini-name">Ola Ride</div>
+              <div class="mini-sub">₹240 spent • 2 hrs ago</div>
+            </div>
+          </div>
+          <div class="mini-earn">+₹12</div>
+        </div>
+        <div class="mini-item">
+          <div class="mini-item-left">
+            <div class="mini-ico">☕</div>
+            <div>
+              <div class="mini-name">Chai Point</div>
+              <div class="mini-sub">₹80 spent • yesterday</div>
+            </div>
+          </div>
+          <div class="mini-earn">+₹4</div>
+        </div>
+      </div>
+      <div class="brand-row">
+        <div class="brand-chip">🛒 Flipkart</div>
+        <div class="brand-chip">🍔 Zomato</div>
+        <div class="brand-chip">🚂 IRCTC</div>
+        <div class="brand-chip">💊 Pharmeasy</div>
+        <div class="brand-chip">🎬 BookMyShow</div>
+      </div>
+    </div>
+    <div class="feature-content">
+      <div class="section-tag">💰 Earn</div>
+      <h2>Rewards on every<br>purchase, everywhere</h2>
+      <p>Link your debit and credit cards or UPI and earn cash rewards automatically on everything — from your morning chai to your monthly grocery run. No receipt photos. No waiting.</p>
+      <div class="feature-pills">
+        <span class="pill">UPI Linked</span>
+        <span class="pill">Auto Cashback</span>
+        <span class="pill">Instant Credit</span>
+        <span class="pill">All Banks</span>
+      </div>
+      <a href="#signup" class="btn-primary">Start Earning →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SAVE SECTION -->
+<section class="section" id="save">
+  <div class="features reverse fade-in">
+    <div class="feature-visual">
+      <div class="feat-icon-big">💡</div>
+      <div class="save-cards">
+        <div class="save-card">
+          <div class="save-card-icon">📱</div>
+          <div class="save-card-title">Mobile Recharge</div>
+          <div class="save-card-desc">Found a better Jio/Airtel plan saving you ₹60/mo</div>
+          <div class="save-card-badge">Save ₹720/yr</div>
+        </div>
+        <div class="save-card">
+          <div class="save-card-icon">🏦</div>
+          <div class="save-card-title">Bank Charges</div>
+          <div class="save-card-desc">Got ₹840 in maintenance fees waived automatically</div>
+          <div class="save-card-badge">Refunded ₹840</div>
+        </div>
+        <div class="save-card">
+          <div class="save-card-icon">🛡️</div>
+          <div class="save-card-title">Insurance</div>
+          <div class="save-card-desc">Found a better health insurance plan — same coverage</div>
+          <div class="save-card-badge">Save ₹3,200/yr</div>
+        </div>
+        <div class="save-card">
+          <div class="save-card-icon">⚡</div>
+          <div class="save-card-title">Electricity Bill</div>
+          <div class="save-card-desc">Identified units to dispute &amp; optimize on your bill</div>
+          <div class="save-card-badge">Save ₹200/mo</div>
+        </div>
+      </div>
+    </div>
+    <div class="feature-content">
+      <div class="section-tag">🔍 Save</div>
+      <h2>Automatically save on<br>your finances</h2>
+      <p>Datrix scans your bills, insurance premiums, bank statements and subscriptions to find you money you're leaving on the table. We do the work — you keep the savings.</p>
+      <div class="feature-pills">
+        <span class="pill">Bill Negotiation</span>
+        <span class="pill">Fee Refunds</span>
+        <span class="pill">Better Plans</span>
+        <span class="pill">Zero Effort</span>
+      </div>
+      <a href="#signup" class="btn-primary">Find My Savings →</a>
+    </div>
+  </div>
+</section>
+
+<!-- DATA MONETIZE -->
+<section class="data-section" id="data">
+  <div class="data-grid fade-in">
+    <div class="data-content">
+      <div class="section-tag" style="background:rgba(255,107,0,0.15); color:var(--saffron)">📊 Monetize</div>
+      <h2>Your data. Your money.<br>Your choice.</h2>
+      <p>Indian companies spend crores analysing consumer behaviour. That data is yours. Datrix puts you in control — choose what to share, earn directly, and stay completely private.</p>
+      <div class="trust-points">
+        <div class="trust-point">
+          <div class="trust-check">✓</div>
+          <div class="trust-text">256-bit SSL encryption — same as your HDFC or SBI netbanking</div>
+        </div>
+        <div class="trust-point">
+          <div class="trust-check">✓</div>
+          <div class="trust-text">Full Data Control Centre — see, pause or delete anything anytime</div>
+        </div>
+        <div class="trust-point">
+          <div class="trust-check">✓</div>
+          <div class="trust-text">DPDP Act (India) compliant — your data is never sold without consent</div>
+        </div>
+        <div class="trust-point">
+          <div class="trust-check">✓</div>
+          <div class="trust-text">Earn directly from surveys, market research and brand studies</div>
+        </div>
+      </div>
+      <a href="#signup" class="btn-primary">Monetize My Data →</a>
+    </div>
+    <div class="data-visual">
+      <div class="data-earn-total">
+        <div class="label">Avg. monthly data income</div>
+        <div class="big">₹634</div>
+        <div class="sub">Paid to your UPI, monthly</div>
+      </div>
+      <div class="data-sources">
+        <div class="data-source">
+          <div class="ds-left">
+            <div class="ds-ico">🛒</div>
+            <div class="ds-name">Shopping data</div>
+          </div>
+          <div style="display:flex; align-items:center; gap:12px">
+            <div class="ds-bar"><div class="ds-bar-fill" style="width:80%"></div></div>
+            <div class="ds-earn">₹240/mo</div>
+          </div>
+        </div>
+        <div class="data-source">
+          <div class="ds-left">
+            <div class="ds-ico">📍</div>
+            <div class="ds-name">Location insights</div>
+          </div>
+          <div style="display:flex; align-items:center; gap:12px">
+            <div class="ds-bar"><div class="ds-bar-fill" style="width:55%"></div></div>
+            <div class="ds-earn">₹180/mo</div>
+          </div>
+        </div>
+        <div class="data-source">
+          <div class="ds-left">
+            <div class="ds-ico">📋</div>
+            <div class="ds-name">Surveys & research</div>
+          </div>
+          <div style="display:flex; align-items:center; gap:12px">
+            <div class="ds-bar"><div class="ds-bar-fill" style="width:65%"></div></div>
+            <div class="ds-earn">₹214/mo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials fade-in">
+  <div class="section-tag">❤️ Loved by India</div>
+  <h2 class="section-title">Trusted by over 3 lakh members</h2>
+  <div class="rating-row">
+    <div class="rating-big">4.9</div>
+    <div class="rating-info">
+      <div class="stars">★★★★★</div>
+      <p>90,000+ reviews on App Store & Play Store</p>
+    </div>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Linked my SBI card and started getting cashback without doing anything. Got ₹340 back in my first month. This is amazing!"</p>
+      <div class="review-author">
+        <div class="review-avatar">A</div>
+        <div>
+          <div class="review-name">Ananya Sharma</div>
+          <div class="review-city">Bengaluru</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Paisa found ₹840 in hidden bank charges and helped me get them waived. I literally didn't have to do anything, just approve the email they drafted!"</p>
+      <div class="review-author">
+        <div class="review-avatar">R</div>
+        <div>
+          <div class="review-name">Rahul Mehta</div>
+          <div class="review-city">Mumbai</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"The surveys pay really well — ₹50 to ₹200 each. I do 4-5 a week during my commute. The cashback on Swiggy and Zomato is a bonus on top!"</p>
+      <div class="review-author">
+        <div class="review-avatar">P</div>
+        <div>
+          <div class="review-name">Pooja Iyer</div>
+          <div class="review-city">Chennai</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Was worried about security but they use the same encryption as my HDFC netbanking. Earned ₹1,200 last month. UPI cashout was instant!"</p>
+      <div class="review-author">
+        <div class="review-avatar">V</div>
+        <div>
+          <div class="review-name">Vikram Singh</div>
+          <div class="review-city">Delhi</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Recommended it to my whole office. Everyone's earning now. Especially useful for families — my wife and I together earn ₹2,400/month passively."</p>
+      <div class="review-author">
+        <div class="review-avatar">K</div>
+        <div>
+          <div class="review-name">Kiran Reddy</div>
+          <div class="review-city">Hyderabad</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Saved ₹3,200 on my health insurance by switching plans Paisa found for me. Same coverage, so much cheaper. Paisa literally paid for my vacation!"</p>
+      <div class="review-author">
+        <div class="review-avatar">S</div>
+        <div>
+          <div class="review-name">Sneha Kulkarni</div>
+          <div class="review-city">Pune</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"As a chai-sipping student I don't spend much but still got ₹180 in my first month. Mostly from surveys and Swiggy rewards. Top app!"</p>
+      <div class="review-author">
+        <div class="review-avatar">M</div>
+        <div>
+          <div class="review-name">Mohammed Arif</div>
+          <div class="review-city">Ahmedabad</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"My IRCTC bookings now earn me rewards. My electricity bill got negotiated down. This app does what 10 apps promise but only Datrix delivers!"</p>
+      <div class="review-author">
+        <div class="review-avatar">D</div>
+        <div>
+          <div class="review-name">Deepa Nair</div>
+          <div class="review-city">Kochi</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SIGN UP (AI-powered) -->
+<section class="signup-section" id="signup">
+  <div class="signup-inner fade-in">
+    <div class="section-tag" style="background:rgba(255,107,0,0.2); color:var(--saffron)">🚀 Get Started</div>
+    <h2>Start earning in 2 minutes</h2>
+    <p>Join 3 lakh+ Indians already putting their data and spending to work.</p>
+
+    <div class="signup-form" id="signupForm">
+      <div class="form-row">
+        <input type="text" class="form-input" id="firstName" placeholder="First name" />
+        <input type="text" class="form-input" id="lastName" placeholder="Last name" />
+      </div>
+      <input type="email" class="form-input" id="email" placeholder="Email address" />
+      <input type="tel" class="form-input" id="phone" placeholder="Mobile number (+91)" />
+      <select class="form-select" id="city">
+        <option value="">Select your city</option>
+        <option>Mumbai</option>
+        <option>Delhi</option>
+        <option>Bengaluru</option>
+        <option>Hyderabad</option>
+        <option>Chennai</option>
+        <option>Pune</option>
+        <option>Kolkata</option>
+        <option>Ahmedabad</option>
+        <option>Jaipur</option>
+        <option>Kochi</option>
+        <option>Other</option>
+      </select>
+      <select class="form-select" id="goal">
+        <option value="">What's your main goal?</option>
+        <option>Earn cashback on purchases</option>
+        <option>Save on bills & finances</option>
+        <option>Earn from my data</option>
+        <option>All of the above</option>
+      </select>
+      <button class="submit-btn" id="submitBtn" onclick="handleSignup()">
+        🎉 Get My Free Account
+      </button>
+    </div>
+
+    <div class="ai-response-box" id="aiResponse">
+      <div class="ai-response-header">
+        <span>✨</span>
+        <span>Datrix AI — Your Personalised Earnings Estimate</span>
+      </div>
+      <div class="ai-response-text" id="aiResponseText">
+        <div class="ai-loading">
+          <span class="dot-pulse">●</span>
+          <span class="dot-pulse">●</span>
+          <span class="dot-pulse">●</span>
+          <span style="margin-left:6px">Calculating your potential earnings...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo" style="margin-bottom:0">
+        <div class="logo-mark">P</div>
+        <span class="logo-text" style="color:white">Datrix<span>.</span></span>
+      </a>
+      <p>India's most trusted app for earning cashback, saving on finances, and monetizing your data — all in one place.</p>
+      <div class="download-badges">
+        <a href="#" class="dl-badge">
+          <span class="dl-badge-icon">🍎</span>
+          <div>
+            <div class="dl-badge-sub">Download on the</div>
+            <div class="dl-badge-text">App Store</div>
+          </div>
+        </a>
+        <a href="#" class="dl-badge">
+          <span class="dl-badge-icon">▶️</span>
+          <div>
+            <div class="dl-badge-sub">Get it on</div>
+            <div class="dl-badge-text">Google Play</div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Product</h4>
+      <ul>
+        <li><a href="#">How it Works</a></li>
+        <li><a href="#">Earn Cashback</a></li>
+        <li><a href="#">Save on Bills</a></li>
+        <li><a href="#">Monetize Data</a></li>
+        <li><a href="#">Refer & Earn</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">Our Mission</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press Kit</a></li>
+        <li><a href="#">Partners</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="#">Help Centre</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Security</a></li>
+        <li><a href="#">Trust & Safety</a></li>
+        <li><a href="#">Status</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>©2024–2026 Datrix Technologies Pvt. Ltd. All rights reserved. Datrix is a registered trademark.</p>
+    <div class="footer-legal">
+      <a href="#">Terms of Use</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">DPDP Compliance</a>
+      <a href="#">Do Not Sell My Data</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll fade-in
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // ── Datrix Backend URL — change this if you deploy online ──────────────────
+  const BACKEND_URL = 'http://localhost:5000';
+
+  // ── Connected signup: calls /api/auth/register + /api/insights ──────────────
+  async function handleSignup() {
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName  = document.getElementById('lastName').value.trim();
+    const email     = document.getElementById('email').value.trim();
+    const phone     = document.getElementById('phone').value.trim();
+    const city      = document.getElementById('city').value;
+    const goal      = document.getElementById('goal').value;
+
+    if (!firstName || !email || !city || !goal) {
+      alert('Please fill in your name, email, city and goal to continue.');
+      return;
+    }
+
+    const btn    = document.getElementById('submitBtn');
+    const box    = document.getElementById('aiResponse');
+    const textEl = document.getElementById('aiResponseText');
+
+    btn.disabled    = true;
+    btn.innerHTML   = '⏳ Setting up your account...';
+    box.classList.add('visible');
+    textEl.innerHTML = `<div class="ai-loading">
+      <span class="dot-pulse">●</span>
+      <span class="dot-pulse">●</span>
+      <span class="dot-pulse">●</span>
+      <span style="margin-left:6px">Calculating your personalised earnings estimate for ${city}...</span>
+    </div>`;
+
+    try {
+      // ── STEP 1: Register the user ──────────────────────────────────────────
+      const regRes = await fetch(`${BACKEND_URL}/api/auth/register`, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ firstName, lastName, email, phone, city, goal }),
+      });
+
+      const regData = await regRes.json();
+
+      // If email already taken, show a friendly message and stop
+      if (!regData.success && regRes.status === 409) {
+        textEl.innerHTML = `<p>👋 Looks like <strong>${email}</strong> already has a Datrix account! Please log in instead, or use a different email address.</p>`;
+        btn.disabled  = false;
+        btn.innerHTML = '🎉 Get My Free Account';
+        return;
+      }
+
+      if (!regData.success) {
+        throw new Error(regData.message || 'Registration failed');
+      }
+
+      // Save userId in sessionStorage so other pages (dashboard etc.) can use it
+      sessionStorage.setItem('datrix_userId',    regData.user.id);
+      sessionStorage.setItem('datrix_firstName', regData.user.firstName);
+      sessionStorage.setItem('datrix_city',      regData.user.city);
+
+      // ── STEP 2: Fetch smart insight ────────────────────────────────────────
+      const insRes = await fetch(`${BACKEND_URL}/api/insights`, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ firstName, city, goal }),
+      });
+
+      const insData = await insRes.json();
+
+      if (!insData.success) throw new Error('Insights fetch failed');
+
+      const { welcome, estimatedEarnings, suggestions, cashbackRate } = insData.insight;
+
+      // ── STEP 3: Render the personalised response ───────────────────────────
+      textEl.innerHTML = `
+        <p style="margin-bottom:10px">${welcome}</p>
+
+        <div style="
+          background: rgba(255,107,0,0.08);
+          border: 1px solid rgba(255,107,0,0.25);
+          border-radius: 12px;
+          padding: 14px 18px;
+          margin: 12px 0;
+          display: flex;
+          align-items: center;
+          gap: 14px;
+        ">
+          <span style="font-size:28px">💰</span>
+          <div>
+            <div style="font-size:13px; color:#888; margin-bottom:2px">Estimated monthly earnings</div>
+            <div style="font-size:22px; font-weight:700; color:var(--saffron)">${estimatedEarnings.label}</div>
+            <div style="font-size:12px; color:#aaa; margin-top:2px">Cashback rate: ${cashbackRate}</div>
+          </div>
+        </div>
+
+        <p style="margin:10px 0 6px; font-weight:600; font-size:14px;">📋 Your first steps:</p>
+        ${suggestions.map((s, i) => `
+          <div style="
+            display:flex; gap:10px; align-items:flex-start;
+            margin-bottom:8px; font-size:14px; line-height:1.5;
+          ">
+            <span style="
+              background:var(--saffron); color:#fff;
+              border-radius:50%; width:20px; height:20px;
+              display:flex; align-items:center; justify-content:center;
+              font-size:11px; font-weight:700; flex-shrink:0; margin-top:2px;
+            ">${i + 1}</span>
+            <span>${s}</span>
+          </div>
+        `).join('')}
+      `;
+
+      btn.innerHTML    = '✅ Account Created — Welcome to Datrix!';
+      btn.style.background = 'linear-gradient(135deg, var(--green) 0%, #1FAD0A 100%)';
+
+    } catch (err) {
+      console.error('Signup error:', err);
+      // Graceful fallback — still shows a useful message
+      textEl.innerHTML = `
+        <p>Welcome aboard, <strong>${firstName}</strong>! 🎉 Your account has been created.</p>
+        <p style="margin-top:8px">Based on users in <strong>${city}</strong> with similar goals, you can expect to earn around
+        <strong style="color:var(--saffron)">₹800–1,400/month</strong> through cashback and data rewards.</p>
+        <p style="margin-top:8px; font-size:13px; color:#888;">
+          (Could not reach the backend — make sure it is running on ${BACKEND_URL})
+        </p>
+      `;
+      btn.innerHTML    = '✅ Account Created!';
+      btn.style.background = 'linear-gradient(135deg, var(--green) 0%, #1FAD0A 100%)';
+    }
+  }
+</script>
+</body>
+</html>
